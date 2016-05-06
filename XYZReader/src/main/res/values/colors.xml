@@ -31,6 +31,8 @@
     <color name="primaryText">#212121</color>
     <color name="secondaryTest">#727272</color>
 
+    <color name="black_overlay">#66000000</color>
+
 </resources>
 
 

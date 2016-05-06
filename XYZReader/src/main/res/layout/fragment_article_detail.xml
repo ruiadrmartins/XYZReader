@@ -6,7 +6,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="192dp"
+        android:layout_height="@dimen/detail_app_bar_height"
         android:background="?colorPrimary">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -15,10 +15,9 @@
             android:layout_height="match_parent"
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-            app:expandedTitleMarginStart="72dp"
+            app:expandedTitleMarginStart="@dimen/expanded_title_margin_start_detail"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="asdf"
             >
 
             <ImageView
@@ -27,6 +26,7 @@
                 android:layout_height="@dimen/detail_card_top_margin"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
+                android:transitionName="@string/transition_image"
                 />
 
             <View
@@ -42,7 +42,6 @@
                 android:layout_height="?actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:contentInsetStart="72dp"
                 app:layout_collapseMode="pin" />
 
 
@@ -73,12 +72,13 @@
                 style="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000" />
+                android:fontFamily="sans-serif-condensed"
+                />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/activity_vertical_margin"/>
+                android:minHeight="@dimen/article_divider_height"/>
 
             <TextView
                 android:id="@+id/article_body"
@@ -91,15 +91,15 @@
 
     <android.support.design.widget.FloatingActionButton
         app:fabSize="normal"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_press_translation_z"
 
         android:id="@+id/fab"
         android:src="@drawable/ic_share"
 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|end"
         />
 

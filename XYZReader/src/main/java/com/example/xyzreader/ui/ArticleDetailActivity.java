@@ -1,5 +1,7 @@
 package com.example.xyzreader.ui;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
@@ -15,6 +17,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.widget.ScrollView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
@@ -62,6 +65,8 @@ public class ArticleDetailActivity extends ActionBarActivity
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
             }
         });
+
+
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
@@ -128,5 +133,20 @@ public class ArticleDetailActivity extends ActionBarActivity
 
     public void upButtonAction() {
         onSupportNavigateUp();
+    }
+
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+
+        ScrollView scrollView = (ScrollView) this.findViewById(R.id.scrollview);
+
+        final int startScrollPos = getResources().getDimensionPixelSize(R.dimen.init_scroll_up_distance);
+        Animator animator = ObjectAnimator.ofInt(
+                scrollView,
+                "scrollY",
+                startScrollPos
+        ).setDuration(300);
+        animator.start();
     }
 }

@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0-beta3'
+        classpath 'com.android.tools.build:gradle:2.1.0'
     }
 }
 apply plugin: 'com.android.application'
@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    compile files('libs/volley.jar')
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:support-v13:23.3.0'
     compile 'com.android.support:appcompat-v7:23.3.0'
@@ -31,5 +32,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    compile files('libs/volley.jar')
 }
