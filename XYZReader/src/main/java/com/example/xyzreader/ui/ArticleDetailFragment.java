@@ -47,6 +47,8 @@ public class ArticleDetailFragment extends Fragment implements
 
     private Toolbar appBar;
 
+    private String photoURL;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -116,19 +118,6 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
-        mPhotoView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), mPhotoView, mPhotoView.getTransitionName()).toBundle();
-
-                Intent intent = new Intent(getActivity() , FullscreenImageActivity.class);
-
-                startActivity(intent, bundle);
-                return false;
-            }
-        });
-
         bindViews();
         return mRootView;
     }
@@ -156,8 +145,11 @@ public class ArticleDetailFragment extends Fragment implements
                             + " by "
                             + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+
+            photoURL = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
+
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
-                    .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
+                    .get(photoURL, new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                             Bitmap bitmap = imageContainer.getBitmap();
@@ -171,6 +163,19 @@ public class ArticleDetailFragment extends Fragment implements
 
                         }
                     });
+            mPhotoView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), mPhotoView, mPhotoView.getTransitionName()).toBundle();
+
+                    Intent intent = new Intent(getActivity() , FullscreenImageActivity.class);
+                    intent.putExtra(FullscreenImageActivity.PHOTO_URL,photoURL);
+
+                    startActivity(intent, bundle);
+                    return false;
+                }
+            });
         } else {
             mRootView.setVisibility(View.GONE);
             collapsingToolbarLayout.setTitle("N/A");
