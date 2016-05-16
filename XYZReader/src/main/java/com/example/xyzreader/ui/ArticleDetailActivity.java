@@ -1,24 +1,17 @@
 package com.example.xyzreader.ui;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsets;
-import android.widget.ScrollView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;

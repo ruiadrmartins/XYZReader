@@ -5,10 +5,8 @@ import android.graphics.Bitmap;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
-import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -17,8 +15,7 @@ import com.example.xyzreader.R;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
+ * Fullscreen actibity to show full sized image
  */
 public class FullscreenImageActivity extends AppCompatActivity {
     private ImageViewTouch mContentView;
