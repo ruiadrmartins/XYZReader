@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,9 +81,13 @@ public class ArticleListActivity extends ActionBarActivity implements
     private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
             if (UpdaterService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
+
                 mIsRefreshing = intent.getBooleanExtra(UpdaterService.EXTRA_REFRESHING, false);
                 updateRefreshingUI();
+
+                Log.v("UPDATED","UPDATED");
             }
         }
     };
@@ -131,15 +137,20 @@ public class ArticleListActivity extends ActionBarActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    LinearLayout trans = (LinearLayout) view.findViewById(R.id.item_layout);
-                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                            ArticleListActivity.this,
-                            trans,
-                            trans.getTransitionName()
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        LinearLayout trans = (LinearLayout) view.findViewById(R.id.item_layout);
+                        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
+                                ArticleListActivity.this,
+                                trans,
+                                trans.getTransitionName()
                         )
-                        .toBundle();
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))),bundle);
+                                .toBundle();
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                    }
                 }
             });
             return vh;

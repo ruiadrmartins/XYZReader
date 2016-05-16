@@ -14,12 +14,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.R;
 
+import it.sephiroth.android.library.imagezoom.ImageViewTouch;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenImageActivity extends AppCompatActivity {
-    private ImageView mContentView;
+    private ImageViewTouch mContentView;
 
     public static final String PHOTO_URL = "photoUrl";
     private String photoURL;
@@ -34,7 +36,7 @@ public class FullscreenImageActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mContentView = (ImageView) findViewById(R.id.image_full);
+        mContentView = (it.sephiroth.android.library.imagezoom.ImageViewTouch) findViewById(R.id.image_full);
 
         Intent intent = getIntent();
         photoURL = intent.getStringExtra(PHOTO_URL);
@@ -54,16 +56,6 @@ public class FullscreenImageActivity extends AppCompatActivity {
 
                     }
                 });
-
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // ZOOM
-            }
-        });
-
-
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ShareCompat;
@@ -163,17 +164,20 @@ public class ArticleDetailFragment extends Fragment implements
 
                         }
                     });
-            mPhotoView.setOnTouchListener(new View.OnTouchListener() {
+
+            mPhotoView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
+                public void onClick(View v) {
 
-                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), mPhotoView, mPhotoView.getTransitionName()).toBundle();
+                    Intent intent = new Intent(getActivity(), FullscreenImageActivity.class);
+                    intent.putExtra(FullscreenImageActivity.PHOTO_URL, photoURL);
 
-                    Intent intent = new Intent(getActivity() , FullscreenImageActivity.class);
-                    intent.putExtra(FullscreenImageActivity.PHOTO_URL,photoURL);
-
-                    startActivity(intent, bundle);
-                    return false;
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), mPhotoView, mPhotoView.getTransitionName()).toBundle();
+                        startActivity(intent, bundle);
+                    } else {
+                        startActivity(intent);
+                    }
                 }
             });
         } else {

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
 import android.view.View;
@@ -133,20 +134,5 @@ public class ArticleDetailActivity extends ActionBarActivity
 
     public void upButtonAction() {
         onSupportNavigateUp();
-    }
-
-    @Override
-    public void onEnterAnimationComplete() {
-        super.onEnterAnimationComplete();
-
-        ScrollView scrollView = (ScrollView) this.findViewById(R.id.scrollview);
-
-        final int startScrollPos = getResources().getDimensionPixelSize(R.dimen.init_scroll_up_distance);
-        Animator animator = ObjectAnimator.ofInt(
-                scrollView,
-                "scrollY",
-                startScrollPos
-        ).setDuration(300);
-        animator.start();
     }
 }
